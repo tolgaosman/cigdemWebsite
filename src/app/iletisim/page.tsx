@@ -232,22 +232,6 @@ export default function IletisimPage() {
     // Show success screen right away
     setEkran('basarili')
     setLoading(false)
-
-    // Fire-and-forget: save to DB in the background
-    fetch('/api/basvuru', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        adSoyad: onBilgi.adSoyad.trim(),
-        email: '',
-        telefon: `${onBilgi.ulkeKodu} ${onBilgi.telefonNo}`,
-        sikayet: onBilgi.sikayet.trim(),
-        anamnezJson: JSON.stringify(cevaplar),
-        iletisimTercihi: 'whatsapp',
-      }),
-    }).catch(() => {
-      // DB save failed silently — WhatsApp message was already sent
-    })
   }
 
   return (
@@ -506,9 +490,6 @@ export default function IletisimPage() {
                   Teşekkürler, <strong>{onBilgi.adSoyad}</strong>.<br />
                   Bilgileriniz WhatsApp mesajına hazırlandı — lütfen uygulamada <strong>Gönder</strong> tuşuna basın.
                   Dr. Çiğdem Dürüst en kısa sürede size dönüş yapacaktır. 🌿
-                </p>
-                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.75rem' }}>
-                  Ayrıca randevu bilgileriniz <strong>durustc@gmail.com</strong> adresine e-posta olarak da iletildi.
                 </p>
               </div>
             )}
