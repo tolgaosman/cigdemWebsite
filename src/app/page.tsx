@@ -122,11 +122,10 @@ export default function HomePage() {
         <div className="about-grid">
           <div className="about-img-wrap fade-in" ref={addRef as never}>
             <div className="about-img-frame">
-              <Image
-                src="/cigdem.jpeg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/cigdemWebsite/cigdem.jpeg"
                 alt="Dr. Çiğdem Dürüst"
-                width={500}
-                height={625}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 15%' }}
               />
             </div>

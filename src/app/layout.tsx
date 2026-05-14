@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     type: 'website',
   },
-  icons: {
-    icon: '/logo.png',
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr">
+      <head>
+        <link rel="icon" href="/cigdemWebsite/logo.png" type="image/png" />
+      </head>
       <body>
         <Navbar />
         <main>{children}</main>
