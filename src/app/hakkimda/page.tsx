@@ -77,8 +77,12 @@ export default function HakkimdaPage() {
             </p>
             <div className="about-tags">
               {[
-                'Bireysel Terapi', 'Çift Terapisi', 'Kaygı Bozuklukları',
-                'BDT', 'EMDR', 'Yas Terapisi', 'Özgüven Çalışmaları',
+                'Bireysel Terapi', 'Çift Terapisi', 'Aile Danışmanlığı',
+                'Kaygı Bozuklukları', 'Depresyon', 'BDT', 'EMDR',
+                'Yas Terapisi', 'Özgüven Çalışmaları',
+                'Ergen ve Yetişkin Psikoterapisi',
+                'İlişki ve İletişim Sorunları',
+                'Stres ve Duygusal Denge Çalışmaları',
               ].map((t) => (
                 <span key={t} className="tag">{t}</span>
               ))}
