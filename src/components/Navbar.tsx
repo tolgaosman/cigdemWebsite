@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -24,7 +25,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <Link href="/" className="navbar-logo" aria-label="Ana Sayfa" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src="/logoisimli.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <Image src="/logoisimli.png" alt="Dr. Çiğdem Dürüst Logo" width={160} height={40} style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
         </Link>
         <div className="navbar-links">
           {links.map((l) => (
