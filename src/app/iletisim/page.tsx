@@ -1,109 +1,13 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-
-/* ── Custom Phone Input ── */
-type UlkeItem = { kod: string; bayrak: string; ulke: string; format: string; uzunluk: number }
-
-function PhoneInput({
-  ulkeler,
-  seciliKod,
-  numara,
-  onKodChange,
-  onNumaraChange,
-}: {
-  ulkeler: UlkeItem[]
-  seciliKod: string
-  numara: string
-  onKodChange: (kod: string) => void
-  onNumaraChange: (n: string) => void
-}) {
-  const [acik, setAcik] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const secili = ulkeler.find(u => u.kod === seciliKod) ?? ulkeler[0]
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setAcik(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
-
-  return (
-    <div ref={ref} style={{ position: 'relative' }}>
-      <div className="phone-row-wrap">
-        {/* Flag + code trigger */}
-        <button
-          type="button"
-          className="phone-flag-btn"
-          onClick={() => setAcik(p => !p)}
-          aria-haspopup="listbox"
-          aria-expanded={acik}
-        >
-          <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>{secili.bayrak}</span>
-          <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary-dark)', letterSpacing: '0.02em' }}>{secili.kod}</span>
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ flexShrink: 0, transition: 'transform 0.2s', transform: acik ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-            <path d="M1 1l4 4 4-4" stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </button>
-        <div className="phone-divider" />
-        {/* Number input */}
-        <input
-          id="telefonNo"
-          type="tel"
-          inputMode="numeric"
-          className="phone-num-input"
-          placeholder={secili.format}
-          value={numara}
-          onChange={e => onNumaraChange(e.target.value.replace(/\D/g, ''))}
-          maxLength={secili.uzunluk + 2}
-          autoComplete="tel-national"
-        />
-      </div>
-      {/* Dropdown list */}
-      {acik && (
-        <ul className="phone-dropdown" role="listbox">
-          {ulkeler.map(u => (
-            <li
-              key={u.kod}
-              role="option"
-              aria-selected={u.kod === seciliKod}
-              className={`phone-dropdown-item${u.kod === seciliKod ? ' selected' : ''}`}
-              onClick={() => { onKodChange(u.kod); onNumaraChange(''); setAcik(false) }}
-            >
-              <span style={{ fontSize: '1.15rem' }}>{u.bayrak}</span>
-              <span style={{ fontWeight: 600, fontSize: '0.83rem', color: 'var(--primary-dark)', minWidth: '38px' }}>{u.kod}</span>
-              <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>{u.ulke}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
-}
+import { useState } from 'react'
 
 type OnBilgi = {
   adSoyad: string
-  ulkeKodu: string
-  telefonNo: string
   sikayet: string
 }
 
 type AnamnezCevap = Record<string, string>
-
-const ULKE_KODLARI = [
-  { kod: '+90', bayrak: '🇹🇷', ulke: 'Türkiye', format: '5XX XXX XX XX', uzunluk: 10 },
-  { kod: '+357', bayrak: '🇨🇾', ulke: 'Güney Kıbrıs', format: 'XX XXXXXX', uzunluk: 8 },
-  { kod: '+44', bayrak: '🇬🇧', ulke: 'İngiltere', format: 'XXXX XXXXXX', uzunluk: 10 },
-  { kod: '+49', bayrak: '🇩🇪', ulke: 'Almanya', format: 'XXX XXXXXXXX', uzunluk: 11 },
-  { kod: '+33', bayrak: '🇫🇷', ulke: 'Fransa', format: 'X XX XX XX XX', uzunluk: 9 },
-  { kod: '+1', bayrak: '🇺🇸', ulke: 'ABD / Kanada', format: 'XXX XXX XXXX', uzunluk: 10 },
-  { kod: '+7', bayrak: '🇷🇺', ulke: 'Rusya', format: 'XXX XXX XXXX', uzunluk: 10 },
-  { kod: '+30', bayrak: '🇬🇷', ulke: 'Yunanistan', format: 'XXX XXXXXXX', uzunluk: 10 },
-  { kod: '+971', bayrak: '🇦🇪', ulke: 'BAE', format: 'XX XXX XXXX', uzunluk: 9 },
-  { kod: '+966', bayrak: '🇸🇦', ulke: 'Suudi Arabistan', format: 'XX XXX XXXX', uzunluk: 9 },
-]
 
 const BOLUMLER = [
   {
@@ -162,31 +66,19 @@ const WHATSAPP_NO = '905338616699'
 
 export default function IletisimPage() {
   const [ekran, setEkran] = useState<'onbilgi' | 'anamnez' | 'basarili'>('onbilgi')
-  const [onBilgi, setOnBilgi] = useState<OnBilgi>({
-    adSoyad: '',
-    ulkeKodu: '+90',
-    telefonNo: '',
-    sikayet: '',
-  })
+  const [onBilgi, setOnBilgi] = useState<OnBilgi>({ adSoyad: '', sikayet: '' })
   const [cevaplar, setCevaplar] = useState<AnamnezCevap>({})
   const [loading, setLoading] = useState(false)
   const [hata, setHata] = useState('')
 
-  const secilenUlke = ULKE_KODLARI.find(u => u.kod === onBilgi.ulkeKodu) ?? ULKE_KODLARI[0]
-  const telefonGecerli = onBilgi.telefonNo.length >= secilenUlke.uzunluk - 1
-
   const onBilgiDolu =
     onBilgi.adSoyad.trim().length > 1 &&
-    telefonGecerli &&
     onBilgi.sikayet.trim().length > 10
 
   const handleGonder = () => {
     setLoading(true)
     setHata('')
 
-    // ── Build WhatsApp URL SYNCHRONOUSLY from state (no await yet) ──
-    // This must happen in the same call stack as the click so browsers
-    // treat window.open as user-initiated and won't block it.
     const BOLUM_BASLIKLARI: Record<string, string> = {
       s1_1: 'Temel şikayetim',
       s1_2: 'Ne kadar süredir devam ediyor',
@@ -209,7 +101,6 @@ export default function IletisimPage() {
       'Merhaba Çiğdem Hanım, randevu almak istiyorum.',
       '',
       '👤 Ad Soyad: ' + onBilgi.adSoyad.trim(),
-      '📞 Telefon: ' + onBilgi.ulkeKodu + ' ' + onBilgi.telefonNo,
       '',
       '📝 Şikayetim:',
       onBilgi.sikayet.trim(),
@@ -226,10 +117,8 @@ export default function IletisimPage() {
     const mesaj = encodeURIComponent(satirlar.join('\n'))
     const waUrl = `https://wa.me/${WHATSAPP_NO}?text=${mesaj}`
 
-    // Open WhatsApp tab immediately — full URL, same call stack as click
     window.open(waUrl, '_blank', 'noopener,noreferrer')
 
-    // Show success screen right away
     setEkran('basarili')
     setLoading(false)
   }
@@ -365,27 +254,6 @@ export default function IletisimPage() {
                   />
                 </div>
 
-                {/* Telefon */}
-                <div className="form-field">
-                  <label className="form-label" htmlFor="telefonNo">
-                    Telefon Numaranız <span className="form-required">*</span>
-                  </label>
-                  <PhoneInput
-                    ulkeler={ULKE_KODLARI}
-                    seciliKod={onBilgi.ulkeKodu}
-                    numara={onBilgi.telefonNo}
-                    onKodChange={kod => setOnBilgi(p => ({ ...p, ulkeKodu: kod, telefonNo: '' }))}
-                    onNumaraChange={n => setOnBilgi(p => ({ ...p, telefonNo: n }))}
-                  />
-                  {onBilgi.telefonNo.length > 0 && !telefonGecerli && (
-                    <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-                      Format: {ULKE_KODLARI.find(u => u.kod === onBilgi.ulkeKodu)?.format}
-                    </p>
-                  )}
-                </div>
-
-
-
                 {/* Şikayet */}
                 <div className="form-field">
                   <label className="form-label" htmlFor="sikayet">
@@ -477,9 +345,7 @@ export default function IletisimPage() {
             {/* EKRAN 3: BAŞARI */}
             {ekran === 'basarili' && (
               <div className="form-success show">
-                <div className="success-icon" style={{
-                  background: 'linear-gradient(135deg,#25D366,#128C7E)'
-                }}>
+                <div className="success-icon" style={{ background: 'linear-gradient(135deg,#25D366,#128C7E)' }}>
                   <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
