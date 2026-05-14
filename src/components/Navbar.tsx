@@ -23,10 +23,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
-        <Link href="/" className="navbar-logo" aria-label="Ana Sayfa" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/cigdemWebsite/logo.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '56px', width: 'auto', objectFit: 'contain' }} />
-        </Link>
+
         <div className="navbar-links">
           {links.map((l) => (
             <Link

@@ -31,12 +31,11 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <section className="hero">
         <div className="hero-bg">
-          <Image
-            src="/hero-bg.jpg"
-            alt="Huzurlu terapi ortamı"
-            fill
-            priority
-            style={{ objectFit: 'cover' }}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/cigdemWebsite/hero-bg.jpg"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </div>
         <div className="hero-overlay" />
