@@ -24,7 +24,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <Link href="/" className="navbar-logo" aria-label="Ana Sayfa" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src="/logo-isimli-transparent.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <img src="/logoisimli.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
         </Link>
         <div className="navbar-links">
           {links.map((l) => (
