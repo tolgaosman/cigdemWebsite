@@ -24,7 +24,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <Link href="/" className="navbar-logo" aria-label="Ana Sayfa" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src="/logo.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(142, 68, 173, 0.2)' }} />
+          <img src="/logo-isimli-transparent.png" alt="Dr. Çiğdem Dürüst Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
         </Link>
         <div className="navbar-links">
           {links.map((l) => (
@@ -47,9 +47,10 @@ export default function Navbar() {
           </Link>
         </div>
         <button
-          className="hamburger"
+          className={`hamburger${mobileOpen ? ' open' : ''}`}
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menüyü aç"
+          aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+          aria-expanded={mobileOpen}
         >
           <span></span>
           <span></span>
@@ -57,27 +58,44 @@ export default function Navbar() {
         </button>
       </nav>
 
-      <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
+      <div className={`mobile-menu${mobileOpen ? ' open' : ''}`} role="dialog" aria-modal="true">
+        {/* Brand accent line */}
+        <div style={{
+          width: '48px', height: '3px', borderRadius: '2px',
+          background: 'linear-gradient(to right, var(--primary-light), var(--primary))',
+          marginBottom: '2rem'
+        }} />
+
         {links.map((l) => (
           <Link
             key={l.href}
             href={l.href}
+            className={pathname === l.href ? 'active' : ''}
             onClick={() => setMobileOpen(false)}
           >
             {l.label}
           </Link>
         ))}
+
         <Link
           href="/iletisim"
           className="nav-cta"
           onClick={() => setMobileOpen(false)}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
         >
-          <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ display: 'inline', marginRight: '0.4rem', verticalAlign: 'middle' }}>
             <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
           Randevu Al
         </Link>
+
+        {/* Bottom close hint */}
+        <p style={{
+          position: 'absolute', bottom: '2rem',
+          fontSize: '0.75rem', color: 'var(--text-muted)',
+          letterSpacing: '0.1em', textTransform: 'uppercase'
+        }}>
+          Dr. Çiğdem Dürüst · Psikolojik Danışmanlık
+        </p>
       </div>
     </>
   )

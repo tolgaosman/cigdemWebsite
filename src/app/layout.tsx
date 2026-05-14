@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     type: 'website',
   },
+  icons: {
+    icon: '/logo-transparent.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

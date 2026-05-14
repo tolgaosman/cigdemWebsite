@@ -123,7 +123,7 @@ export default function HomePage() {
           <div className="about-img-wrap fade-in" ref={addRef as never}>
             <div className="about-img-frame">
               <Image
-                src="/dr-cigdem.jpg"
+                src="/cigdem.jpeg"
                 alt="Dr. Çiğdem Dürüst"
                 width={500}
                 height={625}
