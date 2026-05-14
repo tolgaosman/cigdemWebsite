@@ -23,8 +23,18 @@ export default function Navbar() {
   return (
     <>
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+        {/* Sol üst logo */}
+        <Link href="/" aria-label="Ana Sayfa" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/cigdemWebsite/logo.png"
+            alt="Dr. Çiğdem Dürüst"
+            style={{ height: '52px', width: 'auto', objectFit: 'contain', display: 'block' }}
+          />
+        </Link>
 
-        <div className="navbar-links">
+        {/* Sağa hizalanmış linkler */}
+        <div className="navbar-links" style={{ marginLeft: 'auto' }}>
           {links.map((l) => (
             <Link
               key={l.href}
@@ -44,6 +54,7 @@ export default function Navbar() {
             Randevu Al
           </Link>
         </div>
+
         <button
           className={`hamburger${mobileOpen ? ' open' : ''}`}
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -57,7 +68,6 @@ export default function Navbar() {
       </nav>
 
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`} role="dialog" aria-modal="true">
-        {/* Brand accent line */}
         <div style={{
           width: '48px', height: '3px', borderRadius: '2px',
           background: 'linear-gradient(to right, var(--primary-light), var(--primary))',
@@ -86,7 +96,6 @@ export default function Navbar() {
           Randevu Al
         </Link>
 
-        {/* Bottom close hint */}
         <p style={{
           position: 'absolute', bottom: '2rem',
           fontSize: '0.75rem', color: 'var(--text-muted)',
