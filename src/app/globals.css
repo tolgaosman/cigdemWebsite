@@ -241,42 +241,6 @@ img { max-width: 100%; display: block; }
 .card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
 .card p { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.7; }
 
-/* Approach Cards (Purple Tones) */
-.approach-card {
-  background: linear-gradient(135deg, #FAF6FD 0%, #F1E5F9 100%);
-  border: 1px solid #E5D5F2;
-  box-shadow: 0 4px 20px rgba(142, 68, 173, 0.05);
-}
-.approach-card:hover {
-  background: linear-gradient(135deg, #F5EAFF 0%, #E8D3F7 100%);
-  border-color: var(--primary-light);
-  box-shadow: 0 8px 30px rgba(142, 68, 173, 0.12);
-}
-.approach-card h3 {
-  color: var(--primary-dark);
-  font-weight: 600;
-}
-.approach-card p {
-  color: #3B2354;
-  font-weight: 400;
-}
-.approach-card .card-icon {
-  background: rgba(142, 68, 173, 0.08);
-  border: 1.5px solid var(--primary-light);
-  transition: var(--transition);
-}
-.approach-card:hover .card-icon {
-  background: rgba(142, 68, 173, 0.15);
-  border-color: var(--primary);
-}
-.approach-card .card-icon span {
-  color: var(--primary-dark);
-  transition: var(--transition);
-}
-.approach-card:hover .card-icon span {
-  color: var(--primary);
-}
-
 /* About */
 .about-grid {
   display: grid; grid-template-columns: 1fr 1.2fr;

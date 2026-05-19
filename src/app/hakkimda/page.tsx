@@ -194,9 +194,9 @@ export default function HakkimdaPage() {
               desc: 'Amaç, yalnızca geçici rahatlama değil; yaşamınızın her alanına yansıyacak kalıcı ve güçlü bir dönüşüm sağlamaktır. Kazandığınız farkındalık ve beceriler, uzun vadede daha dengeli ve tatmin edici bir yaşamın temelini oluşturur.',
             },
           ].map((item) => (
-            <div key={item.num} className="card approach-card">
-              <div className="card-icon">
-                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.3rem', fontWeight: 600 }}>{item.num}</span>
+            <div key={item.num} className="card">
+              <div className="card-icon" style={{ background: 'none', border: '1.5px solid var(--primary-light)' }}>
+                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.3rem', color: 'var(--primary)', fontWeight: 600 }}>{item.num}</span>
               </div>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
