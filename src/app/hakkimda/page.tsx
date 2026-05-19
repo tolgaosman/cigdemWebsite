@@ -176,22 +176,22 @@ export default function HakkimdaPage() {
             {
               num: '01',
               title: 'Güvenli Alan',
-              desc: 'Her danışanım için yargısız, güvenli ve gizli bir terapötik ortam oluştururum. Paylaşmak konusunda asla baskı hissetmezsiniz.',
+              desc: 'Burada yargılanmadan, eleştirilmeden ve olduğu gibi kabul edilerek kendinizi ifade edebilirsiniz. Duygularınız, düşünceleriniz ve yaşadıklarınız gizlilik ve saygı çerçevesinde ele alınır. Bu alan, kendinizi anlamanız ve içsel gücünüzü yeniden keşfetmeniz için güvenli bir zemindir.',
             },
             {
               num: '02',
               title: 'Bireysel Plan',
-              desc: 'Tek tip bir yaklaşım yerine; sizin ihtiyaçlarınıza, hedeflerinize ve kültürel arka planınıza göre kişiselleştirilmiş bir yol haritası çizeriz.',
+              desc: 'Her bireyin ihtiyaçları, yaşam öyküsü ve hedefleri farklıdır. Bu nedenle danışmanlık süreci, size özel olarak yapılandırılır ve kendi hızınızda ilerlemenize olanak tanır. Birlikte, yaşam kalitenizi artıracak gerçekçi ve sürdürülebilir bir yol haritası oluştururuz.',
             },
             {
               num: '03',
-              title: 'Kanıta Dayalı',
-              desc: 'BDT, EMDR ve Gottman yöntemi gibi bilimsel temelli tekniklerden yararlanarak somut ve kalıcı değişimler hedefleriz.',
+              title: 'Kanıta Dayalı Yaklaşım',
+              desc: 'Danışmanlık sürecinde, bilimsel araştırmalarla etkinliği desteklenen yöntem ve teknikler kullanılır. İlerleme, belirlenebilir hedefler ve gözlemlenebilir değişimler üzerinden düzenli olarak değerlendirilir. Böylece sürecin etkileri somut ve ölçülebilir sonuçlarla takip edilebilir.',
             },
             {
               num: '04',
               title: 'Sürdürülebilir Değişim',
-              desc: 'Terapi süreci sonunda da kendi başınıza kullanabileceğiniz araçlar ve stratejiler geliştirmenize yardımcı olurum.',
+              desc: 'Amaç, yalnızca geçici rahatlama değil; yaşamınızın her alanına yansıyacak kalıcı ve güçlü bir dönüşüm sağlamaktır. Kazandığınız farkındalık ve beceriler, uzun vadede daha dengeli ve tatmin edici bir yaşamın temelini oluşturur.',
             },
           ].map((item) => (
             <div key={item.num} className="card">

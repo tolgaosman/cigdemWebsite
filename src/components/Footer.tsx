@@ -8,8 +8,9 @@ export default function Footer() {
         <div className="footer-brand">
           <h4>Dr. Çiğdem Dürüst</h4>
           <p>
-            Kuzey Kıbrıs'ta bireysel terapi, çift terapisi ve kaygı bozuklukları
-            alanında uzmanlaşmış psikolojik danışmanlık hizmetleri.
+            Kuzey Kıbrıs'ta ergen ve yetişkinlere yönelik bireysel, çift ve aile terapisi;
+            BDT ve EMDR yaklaşımlarıyla kaygı, depresyon, yas, ilişki sorunları, özgüven ve stres yönetimi
+            alanlarında uzman psikolojik danışmanlık hizmetleri.
           </p>
         </div>
         <div className="footer-col">
