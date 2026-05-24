@@ -15,6 +15,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
   const links = [
     { href: '/', label: 'Ana Sayfa' },
     { href: '/hakkimda', label: 'Hakkımda' },
@@ -46,9 +55,9 @@ export default function Navbar() {
         <Link href="/" aria-label="Ana Sayfa" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/cigdemWebsite/logoisimli.png"
+            src={!(scrolled || mobileOpen) ? "/cigdemWebsite/logoisimlibeyaz.png" : "/cigdemWebsite/logoisimli.png"}
             alt="Dr. Çiğdem Dürüst"
-            className={`navbar-brand-logo ${!(scrolled || mobileOpen) ? 'logo-white' : ''}`}
+            className="navbar-brand-logo"
             style={{ width: 'auto', objectFit: 'contain', display: 'block', transition: 'all 0.3s ease' }}
           />
         </Link>

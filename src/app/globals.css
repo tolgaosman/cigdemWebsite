@@ -60,7 +60,6 @@ img { max-width: 100%; display: block; }
 }
 .navbar-brand-logo { height: 95px; transition: var(--transition); margin: 0.5rem 0; }
 .navbar.scrolled .navbar-brand-logo { height: 75px; margin: 0; }
-.logo-white { filter: brightness(0) invert(1); }
 .navbar-logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem; font-weight: 600;
@@ -116,9 +115,7 @@ img { max-width: 100%; display: block; }
 .mobile-menu {
   display: none;
   position: fixed; inset: 0; top: 72px; z-index: 999;
-  background: rgba(250,248,252,0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--bg);
   flex-direction: column; align-items: center; justify-content: center;
   gap: 0; padding: 0;
   animation: none;
