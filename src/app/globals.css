@@ -75,6 +75,7 @@ img { max-width: 100%; display: block; }
 }
 .navbar.scrolled .navbar-links a { color: var(--text-secondary); }
 .navbar-links a:hover { color: var(--primary) !important; }
+.navbar-links a.active { color: var(--primary) !important; }
 .nav-cta {
   background: var(--primary) !important;
   color: white !important;
