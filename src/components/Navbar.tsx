@@ -17,11 +17,11 @@ export default function Navbar() {
 
   useEffect(() => {
     if (mobileOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = '' }
+    return () => { document.body.style.overflow = ''; };
   }, [mobileOpen])
 
   const links = [
@@ -51,11 +51,11 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Ortadaki logo (logoisimli.png veya logoisimlibeyaz.png) */}
+        {/* Ortadaki logo (logoisimli.png veya logobeyazisimli.png dinamik değişir) */}
         <Link href="/" aria-label="Ana Sayfa" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={(scrolled || mobileOpen) ? "/cigdemWebsite/logoisimli.png" : "/cigdemWebsite/logoisimlibeyaz.png"}
+            src={scrolled || mobileOpen ? "/cigdemWebsite/logoisimli.png" : "/cigdemWebsite/logobeyazisimli.png"}
             alt="Dr. Çiğdem Dürüst"
             className="navbar-brand-logo"
             style={{ width: 'auto', objectFit: 'contain', display: 'block' }}
