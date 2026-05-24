@@ -39,7 +39,6 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className={pathname === l.href ? 'active' : ''}
             >
               {l.label}
             </Link>
@@ -78,7 +77,6 @@ export default function Navbar() {
           <Link
             key={l.href}
             href={l.href}
-            className={pathname === l.href ? 'active' : ''}
             onClick={() => setMobileOpen(false)}
           >
             {l.label}
