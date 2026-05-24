@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
 
 :root {
   --primary: #8E44AD;
@@ -26,7 +26,7 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background: var(--bg);
   color: var(--text-primary);
   line-height: 1.7;
@@ -34,7 +34,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   color: var(--text-primary);
   line-height: 1.2;
 }
@@ -58,7 +58,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-sm);
 }
 .navbar-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.3rem; font-weight: 600;
   color: var(--surface);
   transition: var(--transition);
@@ -117,7 +117,7 @@ img { max-width: 100%; display: block; }
 .mobile-menu a {
   display: flex; align-items: center; justify-content: center;
   width: 100%; padding: 1.4rem 2rem;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem; font-weight: 400;
   color: var(--text-primary); letter-spacing: 0.02em;
   border-bottom: 1px solid var(--border);
@@ -259,7 +259,7 @@ img { max-width: 100%; display: block; }
   background: white; border-radius: 16px; padding: 1.2rem 1.5rem;
   box-shadow: var(--shadow-md); text-align: center;
 }
-.about-badge strong { display: block; font-size: 2rem; color: var(--primary); font-family: 'Cormorant Garamond', serif; }
+.about-badge strong { display: block; font-size: 2rem; color: var(--primary); font-family: 'Playfair Display', serif; }
 .about-badge span { font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.05em; }
 .about-content .section-title { text-align: left; }
 .about-content .divider { margin: 1.5rem 0; }
@@ -283,7 +283,7 @@ img { max-width: 100%; display: block; }
 /* Trust Stats */
 .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 700px; margin: 0 auto 4rem; }
 .stat { text-align: center; }
-.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--primary); line-height: 1; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--primary); line-height: 1; }
 .stat-label { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem; }
 
 /* Contact */
@@ -349,7 +349,7 @@ img { max-width: 100%; display: block; }
 .phone-num-input {
   flex: 1; min-width: 0;
   padding: 0.85rem 1rem; border: none; background: transparent;
-  font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--text-primary);
+  font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text-primary);
   outline: none;
 }
 .phone-num-input::placeholder { color: var(--text-muted); }
@@ -386,10 +386,10 @@ img { max-width: 100%; display: block; }
   min-width: 36px; height: 36px; border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-light), var(--primary));
   color: white; display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700;
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
   flex-shrink: 0;
 }
-.anamnez-baslik { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.15rem; }
+.anamnez-baslik { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.15rem; }
 .anamnez-altbaslik { font-size: 0.78rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
 .anamnez-sorular { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
 .anamnez-soru-item { position: relative; padding-left: 1rem; border-left: 2px solid var(--primary-light); }
@@ -406,11 +406,11 @@ img { max-width: 100%; display: block; }
 .form-step.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .form-q-num { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--primary); font-weight: 600; margin-bottom: 0.4rem; }
-.form-q-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 1.5rem; }
+.form-q-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; }
 .form-input {
   width: 100%; padding: 0.85rem 1.1rem;
   border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--text-primary);
+  font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text-primary);
   background: var(--bg); transition: var(--transition);
   outline: none;
 }
@@ -435,7 +435,7 @@ img { max-width: 100%; display: block; }
 .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
 .btn-form-next, .btn-form-back {
   padding: 0.75rem 1.8rem; border-radius: 50px; border: none;
-  font-family: 'Inter', sans-serif; font-weight: 500; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-weight: 500; cursor: pointer;
   transition: var(--transition); font-size: 0.9rem;
 }
 .btn-form-next { background: var(--primary); color: white; }
@@ -446,7 +446,7 @@ img { max-width: 100%; display: block; }
   width: 100%; padding: 1rem; border-radius: 50px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white; border: none; font-size: 1rem; font-weight: 600;
-  cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif;
+  cursor: pointer; transition: var(--transition); font-family: 'Outfit', sans-serif;
   letter-spacing: 0.03em;
 }
 .btn-form-submit:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
@@ -488,7 +488,7 @@ img { max-width: 100%; display: block; }
   padding: 3rem 5% 1.5rem;
 }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
-.footer-brand h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: white; margin-bottom: 0.5rem; }
+.footer-brand h4 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; margin-bottom: 0.5rem; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
 .footer-col h5 { color: white; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
 .footer-col ul { list-style: none; }
@@ -530,7 +530,7 @@ img { max-width: 100%; display: block; }
   max-width: 700px;
   margin: 0 auto;
 }
-.cta-banner h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: white; margin-bottom: 0.75rem; }
+.cta-banner h3 { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; margin-bottom: 0.75rem; }
 .cta-banner p { color: rgba(255,255,255,0.88); margin-bottom: 2rem; font-size: 1.05rem; }
 .cta-banner .btn-primary { background: white; color: var(--primary-dark); }
 .cta-banner .btn-primary:hover { background: var(--bg); }
@@ -562,7 +562,7 @@ img { max-width: 100%; display: block; }
   margin: 0 auto 1.5rem; color: white;
 }
 .admin-login-card h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem; font-weight: 400; margin-bottom: 0.4rem;
 }
 .admin-login-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; }
@@ -591,7 +591,7 @@ img { max-width: 100%; display: block; }
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border); background: var(--bg);
 }
-.admin-detail-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; }
+.admin-detail-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; }
 .admin-detail-body { padding: 1.5rem; }
 .detail-row {
   display: flex; flex-direction: column; gap: 0.25rem;
