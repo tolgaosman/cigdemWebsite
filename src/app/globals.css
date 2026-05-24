@@ -656,6 +656,7 @@ img { max-width: 100%; display: block; }
   .page-header { padding: 110px 5% 60px; }
 
   /* Hero */
+  .hero-bg, .hero-overlay { position: absolute; }
   .hero-content { padding: 0 1.25rem; }
   .hero h1 { font-size: clamp(2rem, 9vw, 3rem); margin-bottom: 1.2rem; }
   .hero-desc { font-size: 0.95rem; margin-bottom: 2rem; }
