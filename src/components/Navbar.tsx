@@ -42,17 +42,14 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu spacer left */}
-        <div className="mobile-only" style={{ flex: 1 }}></div>
-
         {/* Ortadaki logo (logoisimli.png ve daha büyük) */}
         <Link href="/" aria-label="Ana Sayfa" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/cigdemWebsite/logoisimli.png"
             alt="Dr. Çiğdem Dürüst"
-            className="navbar-brand-logo"
-            style={{ width: 'auto', objectFit: 'contain', display: 'block' }}
+            className={`navbar-brand-logo ${!(scrolled || mobileOpen) ? 'logo-white' : ''}`}
+            style={{ width: 'auto', objectFit: 'contain', display: 'block', transition: 'all 0.3s ease' }}
           />
         </Link>
 
@@ -72,18 +69,17 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="mobile-only" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-          <button
-            className={`hamburger${mobileOpen ? ' open' : ''}`}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
-            aria-expanded={mobileOpen}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
+        <button
+          className={`hamburger${mobileOpen ? ' open' : ''}`}
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+          aria-expanded={mobileOpen}
+          style={{ marginLeft: 'auto' }}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
 
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`} role="dialog" aria-modal="true">
@@ -115,7 +111,8 @@ export default function Navbar() {
         </Link>
 
         <div style={{ position: 'absolute', bottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.2rem', width: '100%' }}>
-          <div style={{ display: 'flex', gap: '1.2rem' }}>
+          <div style={{ width: '80%', height: '1px', background: 'var(--border)' }} />
+          <div style={{ display: 'flex', gap: '1.5rem', padding: '0.2rem 0' }}>
             <a href="https://www.facebook.com/DurustCigdem?locale=tr_TR" target="_blank" rel="noreferrer" aria-label="Facebook" style={{ color: 'var(--text-secondary)' }}>
               <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
