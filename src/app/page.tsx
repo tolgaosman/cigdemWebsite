@@ -1,8 +1,77 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+
+function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?: number }) {
+  const [count, setCount] = useState(0)
+  const [hasStarted, setHasStarted] = useState(false)
+  const elementRef = useRef<HTMLSpanElement>(null)
+
+  const prefix = (value.match(/^[^0-9]+/) || [''])[0];
+  const suffix = (value.match(/[^0-9]+$/) || [''])[0];
+  const targetNumber = parseInt((value.match(/[0-9]+/) || ['0'])[0], 10);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let start = 0;
+    const end = targetNumber;
+    if (start === end) {
+      setCount(end);
+      return;
+    }
+
+    let startTime: number | null = null;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percentage = Math.min(progress / duration, 1);
+      
+      // Easing: easeOutQuad
+      const easePercentage = percentage * (2 - percentage);
+      
+      const currentCount = Math.floor(easePercentage * end);
+      setCount(currentCount);
+
+      if (percentage < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [hasStarted, targetNumber, duration]);
+
+  return (
+    <span ref={elementRef}>
+      {prefix}
+      {hasStarted ? count : 0}
+      {suffix}
+    </span>
+  );
+}
+
 
 export default function HomePage() {
   const fadeRefs = useRef<HTMLElement[]>([])
@@ -176,15 +245,21 @@ export default function HomePage() {
         <div className="divider" />
         <div className="stats-grid fade-in" ref={addRef as never}>
           <div className="stat">
-            <div className="stat-num">500+</div>
+            <div className="stat-num">
+              <AnimatedCounter value="500+" />
+            </div>
             <div className="stat-label">Mutlu Danışan</div>
           </div>
           <div className="stat">
-            <div className="stat-num">10+</div>
+            <div className="stat-num">
+              <AnimatedCounter value="10+" />
+            </div>
             <div className="stat-label">Yıl Deneyim</div>
           </div>
           <div className="stat">
-            <div className="stat-num">%100</div>
+            <div className="stat-num">
+              <AnimatedCounter value="%100" />
+            </div>
             <div className="stat-label">Memnuniyet Garantisi</div>
           </div>
         </div>
