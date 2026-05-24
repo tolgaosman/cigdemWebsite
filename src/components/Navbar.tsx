@@ -48,7 +48,8 @@ export default function Navbar() {
           <img
             src="/cigdemWebsite/logoisimli.png"
             alt="Dr. Çiğdem Dürüst"
-            style={{ height: '75px', width: 'auto', objectFit: 'contain', display: 'block' }}
+            className="navbar-brand-logo"
+            style={{ width: 'auto', objectFit: 'contain', display: 'block' }}
           />
         </Link>
 
