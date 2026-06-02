@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'motion/react'
+import Reveal, { RevealItem } from '@/components/Reveal'
 
 function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?: number }) {
   const [count, setCount] = useState(0)
@@ -48,10 +49,10 @@ function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?:
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      
+
       // Easing: easeOutQuad
       const easePercentage = percentage * (2 - percentage);
-      
+
       const currentCount = Math.floor(easePercentage * end);
       setCount(currentCount);
 
@@ -72,29 +73,17 @@ function AnimatedCounter({ value, duration = 2000 }: { value: string; duration?:
   );
 }
 
+// Hero giriş animasyonu — öğeler sırayla belirir
+const heroContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.16, delayChildren: 0.15 } },
+}
+const heroItem = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } },
+}
 
 export default function HomePage() {
-  const fadeRefs = useRef<HTMLElement[]>([])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible')
-          }
-        })
-      },
-      { threshold: 0.15 }
-    )
-    fadeRefs.current.forEach((el) => el && observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  const addRef = (el: HTMLElement | null) => {
-    if (el && !fadeRefs.current.includes(el)) fadeRefs.current.push(el)
-  }
-
   return (
     <>
       {/* ── HERO ── */}
@@ -108,18 +97,25 @@ export default function HomePage() {
           />
         </div>
         <div className="hero-overlay" />
-        <div className="hero-content">
-          <p className="hero-subtitle">Psikolojik Danışmanlık · Çiğdem Dürüst</p>
-          <h1>
+        <motion.div
+          className="hero-content"
+          variants={heroContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.p className="hero-subtitle" variants={heroItem}>
+            Psikolojik Danışmanlık · Çiğdem Dürüst
+          </motion.p>
+          <motion.h1 variants={heroItem}>
             İçinizdeki <em>huzuru</em>
             <br />
             birlikte bulalım
-          </h1>
-          <p className="hero-desc">
+          </motion.h1>
+          <motion.p className="hero-desc" variants={heroItem}>
             Hayatın karmaşıklıkları arasında kaybolduğunuzda, güvenli ve yargısız
             bir alanda size eşlik etmek için buradayım.
-          </p>
-          <div className="hero-ctas">
+          </motion.p>
+          <motion.div className="hero-ctas" variants={heroItem}>
             <Link href="/iletisim" className="btn-primary">
               <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               Hemen Randevu Al
@@ -127,24 +123,31 @@ export default function HomePage() {
             <Link href="/hakkimda" className="btn-secondary">
               Daha Fazla Öğren
             </Link>
-          </div>
-        </div>
-        <div className="hero-scroll">
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className="hero-scroll"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+        >
           <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           <span>Keşfet</span>
-        </div>
+        </motion.div>
       </section>
 
       {/* ── HIZMETLER ── */}
-      <section className="section section-center" ref={addRef as never}>
-        <p className="section-label">Uzmanlık Alanları</p>
-        <h2 className="section-title">Size nasıl <span>yardımcı</span> olabilirim?</h2>
-        <div className="divider" />
-        <p className="section-desc">
-          Her bireyin hikayesi kendine özgüdür. Birlikte, size en uygun terapötik
-          yaklaşımı belirleriz.
-        </p>
-        <div className="cards-grid">
+      <section className="section section-center">
+        <Reveal>
+          <p className="section-label">Uzmanlık Alanları</p>
+          <h2 className="section-title">Size nasıl <span>yardımcı</span> olabilirim?</h2>
+          <div className="divider" />
+          <p className="section-desc">
+            Her bireyin hikayesi kendine özgüdür. Birlikte, size en uygun terapötik
+            yaklaşımı belirleriz.
+          </p>
+        </Reveal>
+        <Reveal stagger as="div" className="cards-grid">
           {[
             {
               icon: (
@@ -168,27 +171,29 @@ export default function HomePage() {
               desc: 'Aile içi iletişimi güçlendirmek, kuşaklar arası sorunları ele almak ve sağlıklı aile dinamikleri oluşturmak için destek.',
             },
           ].map((card) => (
-            <div key={card.title} className="card fade-in" ref={addRef as never}>
+            <RevealItem key={card.title} className="card">
               <div className="card-icon">{card.icon}</div>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>
-            </div>
+            </RevealItem>
           ))}
           {/* Diğer Destek Alanları butonu */}
-          <Link href="/destek-alanlari" className="card fade-in" ref={addRef as never} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', border: '2px dashed var(--primary-light)' }}>
-            <div className="card-icon">
-              <svg fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            </div>
-            <h3>Diğer Destek Alanları</h3>
-            <p>Tüm çalışma alanlarını keşfetmek için tıklayın →</p>
-          </Link>
-        </div>
+          <RevealItem className="card" style={{ border: '2px dashed var(--primary-light)' }}>
+            <Link href="/destek-alanlari" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+              <div className="card-icon">
+                <svg fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <h3>Diğer Destek Alanları</h3>
+              <p>Tüm çalışma alanlarını keşfetmek için tıklayın →</p>
+            </Link>
+          </RevealItem>
+        </Reveal>
       </section>
 
       {/* ── ABOUT TEASER ── */}
       <section className="section section-alt">
         <div className="about-grid">
-          <div className="about-img-wrap fade-in" ref={addRef as never}>
+          <Reveal className="about-img-wrap" direction="right">
             <div className="about-img-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -201,15 +206,15 @@ export default function HomePage() {
               <strong>10+</strong>
               <span>Yıl Deneyim</span>
             </div>
-          </div>
-          <div className="about-content fade-in" ref={addRef as never}>
+          </Reveal>
+          <Reveal className="about-content" direction="left" delay={0.1}>
             <p className="section-label">Hakkımda</p>
             <h2 className="section-title">
               Empatik, <span>yargısız</span> bir yaklaşım
             </h2>
             <div className="divider" />
             <p className="about-desc">
-              Merhaba, ben Dr. Çiğdem Dürüst. Kuzey Kıbrıs'ta psikolojik danışmanlık
+              Merhaba, ben Dr. Çiğdem Dürüst. Kuzey Kıbrıs&apos;ta psikolojik danışmanlık
               alanında uzmanlaşmış bir terapistim. Bireysel terapi, çift terapisi ve
               kaygı bozuklukları konularında danışanlarıma destek sunuyorum.
             </p>
@@ -230,48 +235,50 @@ export default function HomePage() {
                 <span key={t} className="tag">{t}</span>
               ))}
             </div>
-            <Link href="/hakkimda" className="btn-primary" style={{ display: 'inline-flex', marginTop: '1rem' }}>
+            <Link href="/hakkimda" className="btn-primary" style={{ display: 'inline-flex', marginTop: '1rem', background: 'var(--gradient-brand)', color: 'white' }}>
               Daha Fazla Öğren
               <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ marginLeft: '0.5rem' }}><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── STATS ── */}
       <section className="section section-center">
-        <p className="section-label">Rakamlarla</p>
-        <h2 className="section-title">Birlikte yürüdüğümüz <span>yol</span></h2>
-        <div className="divider" />
-        <div className="stats-grid fade-in" ref={addRef as never}>
-          <div className="stat">
+        <Reveal>
+          <p className="section-label">Rakamlarla</p>
+          <h2 className="section-title">Birlikte yürüdüğümüz <span>yol</span></h2>
+          <div className="divider" />
+        </Reveal>
+        <Reveal stagger as="div" className="stats-grid">
+          <RevealItem className="stat">
             <div className="stat-num">
               <AnimatedCounter value="500+" />
             </div>
             <div className="stat-label">Mutlu Danışan</div>
-          </div>
-          <div className="stat">
+          </RevealItem>
+          <RevealItem className="stat">
             <div className="stat-num">
               <AnimatedCounter value="10+" />
             </div>
             <div className="stat-label">Yıl Deneyim</div>
-          </div>
-          <div className="stat">
+          </RevealItem>
+          <RevealItem className="stat">
             <div className="stat-num">
               <AnimatedCounter value="%100" />
             </div>
             <div className="stat-label">Memnuniyet Garantisi</div>
-          </div>
-        </div>
+          </RevealItem>
+        </Reveal>
 
         {/* CTA Banner */}
-        <div className="cta-banner fade-in" ref={addRef as never}>
+        <Reveal className="cta-banner" delay={0.1}>
           <h3>Yardım istemek cesaret ister.</h3>
           <p>İlk adımı atmaya hazır hissediyorsanız, buradayım.</p>
           <Link href="/iletisim" className="btn-primary">
             Randevu Al
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   )

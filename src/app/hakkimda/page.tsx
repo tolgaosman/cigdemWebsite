@@ -1,46 +1,30 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
+import Reveal, { RevealItem } from '@/components/Reveal'
 
 export default function HakkimdaPage() {
-  const fadeRefs = useRef<HTMLElement[]>([])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.12 }
-    )
-    fadeRefs.current.forEach((el) => el && observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  const addRef = (el: HTMLElement | null) => {
-    if (el && !fadeRefs.current.includes(el)) fadeRefs.current.push(el)
-  }
-
   return (
     <>
       {/* ── PAGE HEADER ── */}
       <div className="page-header">
         <div className="page-header-bg" />
-        <div className="page-header-content">
+        <Reveal className="page-header-content" direction="none">
           <p className="section-label" style={{ color: 'rgba(255,255,255,0.8)' }}>Hakkımda</p>
-          <h1 style={{ color: 'white', fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', marginBottom: '1rem' }}>
+          <h1 style={{ color: 'white', fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, fontSize: 'clamp(2.4rem, 5vw, 4rem)', marginBottom: '1rem' }}>
             Ben Kimim?
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.85)', maxWidth: '520px', lineHeight: 1.8, textAlign: 'center', margin: '0 auto' }}>
             Empatik, yargısız ve bilimsel temelli bir yaklaşımla her danışanın
             kendine özgü yolculuğuna eşlik ediyorum.
           </p>
-        </div>
+        </Reveal>
       </div>
 
       {/* ── ANA BİO ── */}
       <section className="section">
         <div className="about-grid">
-          <div className="about-img-wrap fade-in" ref={addRef as never}>
+          <Reveal className="about-img-wrap" direction="right">
             <div className="about-img-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -53,13 +37,13 @@ export default function HakkimdaPage() {
               <strong>Dr.</strong>
               <span>Psikolojik Danışman</span>
             </div>
-          </div>
-          <div className="about-content fade-in" ref={addRef as never}>
+          </Reveal>
+          <Reveal className="about-content" direction="left" delay={0.1}>
             <p className="section-label">Tanışalım</p>
             <h2 className="section-title">Dr. Çiğdem <span>DÜRÜST</span></h2>
             <div className="divider" />
             <p className="about-desc">
-              Merhaba, ben Dr. Çiğdem Dürüst. Kuzey Kıbrıs'ta psikolojik danışmanlık
+              Merhaba, ben Dr. Çiğdem Dürüst. Kuzey Kıbrıs&apos;ta psikolojik danışmanlık
               alanında 10 yılı aşkın deneyime sahibim. Bireysel terapi, çift terapisi
               ve kaygı bozuklukları konularında uzmanlaşmış bir terapistim.
             </p>
@@ -87,15 +71,15 @@ export default function HakkimdaPage() {
                 <span key={t} className="tag">{t}</span>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── EĞİTİM & DENEYİM ── */}
       <section className="section section-alt">
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }} className="edu-grid">
-            <div className="fade-in" ref={addRef as never}>
+          <div className="edu-grid">
+            <Reveal direction="right">
               <p className="section-label">Eğitim</p>
               <h2 className="section-title" style={{ fontSize: '2rem' }}>Akademik <span>Geçmiş</span></h2>
               <div className="divider" style={{ margin: '1.2rem 0' }} />
@@ -122,9 +106,9 @@ export default function HakkimdaPage() {
                   </div>
                 </li>
               </ul>
-            </div>
+            </Reveal>
 
-            <div className="fade-in" ref={addRef as never}>
+            <Reveal direction="left" delay={0.1}>
               <p className="section-label">Sertifikalar</p>
               <h2 className="section-title" style={{ fontSize: '2rem' }}>Uzmanlık <span>Alanları</span></h2>
               <div className="divider" style={{ margin: '1.2rem 0' }} />
@@ -158,20 +142,22 @@ export default function HakkimdaPage() {
                   </div>
                 </li>
               </ul>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ── YAKLAŞIM ── */}
       <section className="section section-center">
-        <p className="section-label">Terapötik Yaklaşım</p>
-        <h2 className="section-title">Nasıl <span>çalışıyorum?</span></h2>
-        <div className="divider" />
-        <p className="section-desc">
-          Her seansımda bilimsel yöntemleri insani sıcaklıkla harmanlıyorum.
-        </p>
-        <div className="cards-grid fade-in" ref={addRef as never}>
+        <Reveal>
+          <p className="section-label">Terapötik Yaklaşım</p>
+          <h2 className="section-title">Nasıl <span>çalışıyorum?</span></h2>
+          <div className="divider" />
+          <p className="section-desc">
+            Her seansımda bilimsel yöntemleri insani sıcaklıkla harmanlıyorum.
+          </p>
+        </Reveal>
+        <Reveal stagger as="div" className="cards-grid">
           {[
             {
               num: '01',
@@ -194,26 +180,26 @@ export default function HakkimdaPage() {
               desc: 'Amaç, yalnızca geçici rahatlama değil; yaşamınızın her alanına yansıyacak kalıcı ve güçlü bir dönüşüm sağlamaktır. Kazandığınız farkındalık ve beceriler, uzun vadede daha dengeli ve tatmin edici bir yaşamın temelini oluşturur.',
             },
           ].map((item) => (
-            <div key={item.num} className="card">
-              <div className="card-icon" style={{ background: 'none', border: '1.5px solid var(--primary-light)' }}>
-                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.3rem', color: 'var(--primary)', fontWeight: 600 }}>{item.num}</span>
+            <RevealItem key={item.num} className="card">
+              <div className="card-icon" style={{ background: 'rgba(255,255,255,0.6)', border: '1.5px solid var(--primary-light)', boxShadow: 'none' }}>
+                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.4rem', color: 'var(--primary)', fontWeight: 600 }}>{item.num}</span>
               </div>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ── CTA ── */}
       <section className="section section-alt section-center">
-        <div className="cta-banner fade-in" ref={addRef as never}>
+        <Reveal className="cta-banner">
           <h3>Birlikte çalışmaya hazır mısınız?</h3>
           <p>İlk adımı atmak bazen en zor olanıdır — ama siz buradasınız, bu başlı başına cesaret.</p>
           <Link href="/iletisim" className="btn-primary">
             Randevu Formu
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   )
