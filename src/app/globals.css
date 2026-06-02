@@ -857,6 +857,70 @@ img { max-width: 100%; display: block; }
 /* Edu grid responsive */
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; position: relative; z-index: 1; }
 
+/* ─── Hero trust chips ─── */
+.hero-trust {
+  display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center;
+  margin-top: 2.4rem;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1.15rem; border-radius: 50px;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(10px);
+  color: #fff; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+.hero-chip:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.hero-chip svg { width: 16px; height: 16px; opacity: 0.92; }
+
+/* ─── Services strip (dağınık dashed kart yerine) ─── */
+.services-strip {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.6rem; flex-wrap: wrap;
+  margin-top: 1.8rem; padding: 1.8rem 2.2rem;
+  border-radius: var(--radius);
+  background: var(--gradient-brand); color: #fff;
+  box-shadow: var(--shadow-md); text-align: left;
+}
+.services-strip::after {
+  content: ''; position: absolute; top: -60%; right: -6%;
+  width: 18rem; height: 18rem; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,169,136,0.35), transparent 70%);
+  pointer-events: none;
+}
+.services-strip-text { position: relative; z-index: 1; }
+.services-strip-text strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; margin-bottom: 0.2rem; }
+.services-strip-text span { font-size: 0.95rem; color: rgba(255,255,255,0.88); }
+.services-strip .btn-primary { position: relative; z-index: 1; background: #fff; color: var(--primary-dark); white-space: nowrap; }
+
+/* ─── Quote / philosophy band ─── */
+.quote-band {
+  position: relative; overflow: hidden;
+  padding: 6.5rem 5%; text-align: center;
+  background: linear-gradient(135deg, var(--bg-warm), var(--bg-cream));
+}
+.quote-band::before {
+  content: '“'; position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%);
+  font-family: 'Playfair Display', serif; font-size: 13rem; line-height: 1;
+  color: var(--primary); opacity: 0.10; pointer-events: none;
+}
+.quote-band blockquote {
+  position: relative; z-index: 1; max-width: 800px; margin: 0 auto;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.45; color: var(--text-primary);
+}
+.quote-band blockquote em {
+  font-style: italic;
+  background: var(--gradient-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.quote-band cite {
+  display: block; margin-top: 1.6rem; font-style: normal;
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--primary); font-weight: 700;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────── */
 
 @media (max-width: 1024px) {
@@ -918,6 +982,12 @@ img { max-width: 100%; display: block; }
   .cta-banner { padding: 2.6rem 1.5rem; }
   .cta-banner h3 { font-size: 1.65rem; }
   .cta-banner p { font-size: 0.95rem; }
+
+  .hero-trust { gap: 0.5rem; margin-top: 1.8rem; }
+  .hero-chip { font-size: 0.74rem; padding: 0.45rem 0.9rem; }
+  .services-strip { flex-direction: column; text-align: center; padding: 1.6rem; }
+  .services-strip-text { display: flex; flex-direction: column; align-items: center; }
+  .quote-band { padding: 4.5rem 5%; }
 
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .contact-info-card { padding: 1.75rem; }

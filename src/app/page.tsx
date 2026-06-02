@@ -124,6 +124,20 @@ export default function HomePage() {
               Daha Fazla Öğren
             </Link>
           </motion.div>
+          <motion.div className="hero-trust" variants={heroItem}>
+            <span className="hero-chip">
+              <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+              Lefkoşa, Kuzey Kıbrıs
+            </span>
+            <span className="hero-chip">
+              <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.42A12 12 0 0112 21a12 12 0 01-6.16-10.42L12 14z"/></svg>
+              10+ Yıl Deneyim
+            </span>
+            <span className="hero-chip">
+              <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+              EMDR &amp; BDT Sertifikalı
+            </span>
+          </motion.div>
         </motion.div>
         <motion.div
           className="hero-scroll"
@@ -177,16 +191,17 @@ export default function HomePage() {
               <p>{card.desc}</p>
             </RevealItem>
           ))}
-          {/* Diğer Destek Alanları butonu */}
-          <RevealItem className="card" style={{ border: '2px dashed var(--primary-light)' }}>
-            <Link href="/destek-alanlari" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
-              <div className="card-icon">
-                <svg fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-              </div>
-              <h3>Diğer Destek Alanları</h3>
-              <p>Tüm çalışma alanlarını keşfetmek için tıklayın →</p>
-            </Link>
-          </RevealItem>
+        </Reveal>
+        {/* Diğer destek alanlarına yönlendiren şerit */}
+        <Reveal className="services-strip" delay={0.1}>
+          <div className="services-strip-text">
+            <strong>Yas, depresyon, özgüven, stres ve daha fazlası</strong>
+            <span>Çalıştığım tüm destek alanlarını keşfedin.</span>
+          </div>
+          <Link href="/destek-alanlari" className="btn-primary">
+            Diğer Destek Alanları
+            <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ marginLeft: '0.4rem' }}><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+          </Link>
         </Reveal>
       </section>
 
@@ -241,6 +256,17 @@ export default function HomePage() {
             </Link>
           </Reveal>
         </div>
+      </section>
+
+      {/* ── PHILOSOPHY / QUOTE ── */}
+      <section className="quote-band">
+        <Reveal>
+          <blockquote>
+            Her danışanın kendine has bir <em>hikayesi</em> olduğuna inanıyorum;
+            terapi de bu hikayeye yargısızca eşlik etmekle başlar.
+          </blockquote>
+          <cite>Dr. Çiğdem Dürüst</cite>
+        </Reveal>
       </section>
 
       {/* ── STATS ── */}
